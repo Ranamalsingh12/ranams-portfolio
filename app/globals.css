@@ -1,0 +1,163 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --background: #fbfaf7;
+  --foreground: #111111;
+  --muted-foreground: #6d695f;
+  --line: rgba(17, 17, 17, 0.08);
+  --line-strong: rgba(17, 17, 17, 0.13);
+  --surface: rgba(255, 255, 255, 0.76);
+  --surface-solid: rgba(255, 255, 255, 0.92);
+  --grid: rgba(17, 17, 17, 0.045);
+  color-scheme: light;
+}
+
+.dark {
+  --background: #0e1116;
+  --foreground: #f4f4ef;
+  --muted-foreground: rgba(244, 244, 239, 0.66);
+  --line: rgba(255, 255, 255, 0.08);
+  --line-strong: rgba(255, 255, 255, 0.14);
+  --surface: rgba(18, 23, 31, 0.76);
+  --surface-solid: rgba(18, 23, 31, 0.92);
+  --grid: rgba(255, 255, 255, 0.05);
+  color-scheme: dark;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at left bottom, rgba(255, 255, 255, 0.96), transparent 28%),
+    radial-gradient(circle at right bottom, rgba(255, 255, 255, 0.94), transparent 32%),
+    var(--background);
+  color: var(--foreground);
+  font-family:
+    "Inter",
+    "SF Pro Display",
+    "SF Pro Text",
+    "Helvetica Neue",
+    Arial,
+    sans-serif;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+body::before {
+  content: "";
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background-image:
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size: 118px 118px;
+}
+
+.dark body {
+  background:
+    radial-gradient(circle at left bottom, rgba(59, 130, 246, 0.14), transparent 28%),
+    radial-gradient(circle at right bottom, rgba(148, 163, 184, 0.08), transparent 32%),
+    var(--background);
+}
+
+::selection {
+  background: rgba(17, 17, 17, 0.12);
+  color: var(--foreground);
+}
+
+.dark ::selection {
+  background: rgba(255, 255, 255, 0.18);
+}
+
+a {
+  text-decoration: none;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+main {
+  position: relative;
+  z-index: 1;
+}
+
+.surface {
+  border: 1px solid var(--line-strong);
+  background: var(--surface);
+  backdrop-filter: blur(16px);
+}
+
+.surface-solid {
+  border: 1px solid var(--line-strong);
+  background: var(--surface-solid);
+  backdrop-filter: blur(16px);
+}
+
+.section-label {
+  color: var(--muted-foreground);
+  font-size: 0.82rem;
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+}
+
+.card-shadow {
+  box-shadow: 0 24px 80px -54px rgba(15, 23, 42, 0.18);
+}
+
+.dark .card-shadow {
+  box-shadow: 0 30px 90px -56px rgba(0, 0, 0, 0.64);
+}
+
+body::-webkit-scrollbar {
+  width: 10px;
+}
+
+body::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+body::-webkit-scrollbar-thumb {
+  border: 2px solid transparent;
+  border-radius: 999px;
+  background: rgba(120, 120, 120, 0.32);
+  background-clip: padding-box;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
